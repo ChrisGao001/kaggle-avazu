@@ -1,0 +1,21 @@
+解决方案：
+ffm ＋ ensemble
+
+特征工程：
+base
+1. 筛选基本特征['id','click','hour','banner_pos','device_id','device_ip','device_model','device_conn_type','C14','C17','C20','C21']
+2. 根据count构造新特征。比如
+    if int(row['device_id_count']) > 1000:
+        feats.append(hashstr('device_id-'+row['device_id']))
+    else:
+        feats.append(hashstr('device_id-less-'+row['device_id_count']))
+   点击历史特征
+    if int(row['user_count']) > 30:
+        feats.append(hashstr('user_click_histroy-'+row['user_count']))
+    else:
+        feats.append(hashstr('user_click_histroy-'+row['user_count']+'-'+row['user_click_histroy']))
+3. hash trick
+4. ffm 参数
+   app  -r 0.03 -s 1 -t 13
+   site -r 0.03 -s 1 -t 17
+5. 根据各种条件构造子集进行训练

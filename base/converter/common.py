@@ -1,10 +1,13 @@
+#coding:utf8
 import hashlib, csv, math, os, subprocess
 
 NR_BINS = 1000000
 
+# hash函数
 def hashstr(input):
     return str(int(hashlib.md5(input.encode('utf8')).hexdigest(), 16)%(NR_BINS-1)+1)
 
+# 忽略首行next是每个迭代器都有的功能
 def open_with_first_line_skipped(path, skip=True):
     f = open(path)
     if not skip:

@@ -67,6 +67,7 @@ def subset(src_path, dst_path, is_train):
             sys.stderr.write('{0:6.0f}    {1}m\n'.format(time.time()-start,int(i/1000000)))
 
         match = True
+        # A match start_with
         for field, values in filter.items():
             for value in values:
                 if not row[field].startswith(value):
@@ -74,7 +75,7 @@ def subset(src_path, dst_path, is_train):
                     break
         if not match:
             continue
-        
+        # E end_mis_match
         for field, values in inv_end_filter.items():
             for value in values:
                 if row[field].endswith(value):
@@ -82,7 +83,7 @@ def subset(src_path, dst_path, is_train):
                     break
         if not match:
             continue
-        
+        # C count == value
         for field, values in cnt_filter.items():
             for value in values:
                 if cnt[field+'-'+row[field]] != value:
@@ -90,7 +91,7 @@ def subset(src_path, dst_path, is_train):
                     break
         if not match:
             continue
-
+        # B start_mismatch 
         for field, values in inv_filter.items():
             for value in values:
                 if row[field].startswith(value):

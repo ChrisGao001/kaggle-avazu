@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cd mark
-make clean all
+make CXX=g++-7 clean all
 cd ..
 
 if [ -s "mark18" ]
